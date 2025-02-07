@@ -10,6 +10,13 @@
     <button type="submit" id="search"class="btn btn-primary">Search</button>
   </div>
 </form>
+<div class="fact">
+<h2>Random Fact</h2>
+{% for fact in facts %}
+  <p>{{ fact.fact }}</p>
+  <p>-Source: <a href="{{ fact.source_url }}" class="fact-link">{{ fact.source_name }}</a></p>
+{% endfor %}
+</div>
 <h2>Books</h2>
 <table class="table table-striped">
   <thead>
