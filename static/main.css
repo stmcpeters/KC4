@@ -1,3 +1,7 @@
+body {
+  margin-top: 20px;
+}
+
 h1,
 h2,
 th {
@@ -27,4 +31,8 @@ th {
 .form-group input,
 .form-group button {
   margin-right: 10px;
+}
+
+input[type="submit"] {
+  margin-bottom: 10px;
 }
