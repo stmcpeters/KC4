@@ -17,6 +17,24 @@ a:hover {
   color: black;
 }
 
+.fact-link {
+  color: black;
+  text-decoration: underline;
+}
+
+.fact-link:hover {
+  color: blue;
+}
+
+.fact {
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid black;
+  box-shadow: 1px 1px 5px black;
+  margin: 10px;
+}
+
 th {
   text-align: center;
 }
