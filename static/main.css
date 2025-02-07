@@ -1,0 +1,14 @@
+h1,
+th {
+  text-align: center;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: black;
+}
+th {
+  text-align: center;
+}
