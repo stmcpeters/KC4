@@ -1,14 +1,30 @@
 h1,
+h2,
 th {
   text-align: center;
 }
+
 a {
   color: white;
   text-decoration: none;
 }
+
 a:hover {
   color: black;
 }
+
 th {
   text-align: center;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.form-group label,
+.form-group input,
+.form-group button {
+  margin-right: 10px;
 }
