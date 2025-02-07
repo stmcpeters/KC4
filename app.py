@@ -6,7 +6,7 @@ import sqlite3
 # create a connection to the database
 app = Flask(__name__)
 
-def db_connection():
+def book_db_connection():
     # connect to database
     connection = sqlite3.connect('bookstore.db')
     # allows us to access the columns of the database by name like a Python dictionary
@@ -14,21 +14,33 @@ def db_connection():
     # access the database using a cursor object
     return connection
 
+def facts_db_connection():
+    # connect to database
+    connection = sqlite3.connect('random_facts.db')
+    # allows us to access the columns of the database by name like a Python dictionary
+    connection.row_factory = sqlite3.Row
+    # access the database using a cursor object
+    return connection
+
 @app.route('/', methods=['GET'])
 def index():
-    # opens the database connection
-    connection = db_connection()
+    # opens the database connections
+    connection = book_db_connection()
+    c = facts_db_connection()
     # fetches all the data from the top_books table
     data = connection.execute('''SELECT * FROM top_books''').fetchall()
+    # fetches all the data from the facts table
+    facts = c.execute('''SELECT * FROM facts''').fetchall()
     # closes database connection
     connection.close()
+    c.close()
     # render the index.html template and pass the data from the database
-    return render_template('index.html', books=data)
+    return render_template('index.html', books=data, facts=facts)
 
 @app.route('/edit/<int:id>', methods=['POST', 'GET'])
 def edit_book(id):
     # opens the database connection
-    connection = db_connection()
+    connection = book_db_connection()
     if request.method == 'POST':
         # form data from the user
         title = request.form['title']
@@ -50,7 +62,7 @@ def edit_book(id):
 @app.route('/delete/<int:id>', methods=['POST', 'GET'])
 def delete_book(id):
     # opens the database connection
-    connection = db_connection()
+    connection = book_db_connection()
     # deletes the data from the top_books table with the specified ID
     book = connection.execute('''DELETE FROM top_books WHERE id = ?''', (id,))
     # saves the changes
@@ -64,7 +76,7 @@ def delete_book(id):
 def add_book():
     if request.method == 'POST':
         # opens the database connection
-        connection = db_connection()
+        connection = book_db_connection()
         # form data from the user
         title = request.form['title']
         price = request.form['price']
@@ -84,7 +96,7 @@ def add_book():
 def search():
     if request.method == 'POST':
         # opens the database connection
-        connection = db_connection()
+        connection = book_db_connection()
         # form data from the user
         search = request.form['search']
         # searches the data from the top_books table with the specified title
