@@ -53,7 +53,7 @@ def edit_book(id):
         # closes database connection
         connection.close()
         # redirects to the index.html page
-        redirect(url_for('index'))
+        return redirect(url_for('index'))
     else:
         book = connection.execute('''SELECT * FROM top_books WHERE id = ?''', (id,)).fetchone()
         connection.close()
